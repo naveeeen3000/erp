@@ -15,6 +15,7 @@ class Users(AbstractUser):
     profile_image = models.ImageField(null=True)
     student_id = models.CharField(max_length=20,null=True)
     standard = models.CharField(max_length=20,null=True)
+    phone = models.CharField(max_length=13,null=True)
     college_id = models.IntegerField(null=True)
     address = models.TextField(null=True)
     summary = models.TextField(null=True)
