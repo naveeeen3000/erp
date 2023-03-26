@@ -12,5 +12,6 @@ def create_db(DB_NAME):
 
         cursor = connection.cursor()
         cursor.execute("CREATE DATABASE IF NOT EXISTS {} CHARACTER SET utf8 COLLATE utf8_general_ci;".format(DB_NAME))
+        connection.close()
     except:
         raise ConnectionError
