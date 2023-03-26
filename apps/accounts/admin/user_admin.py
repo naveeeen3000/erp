@@ -12,7 +12,8 @@ class CustomUserAdmin(UserAdmin):
                         'role','summary','address')
         }),
     )
-
+    readonly_fields = ['student_id','username','role']
+    
     add_fieldsets = (
         (None,{
             "fields": ('student_id','username','password1','password2')

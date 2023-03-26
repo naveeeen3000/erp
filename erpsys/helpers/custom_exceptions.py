@@ -1,4 +1,4 @@
-
+"""Custom exceptions."""
 class PasswordsDontMatchException(Exception):
     
     def __init__(self,message):
