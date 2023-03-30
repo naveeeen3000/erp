@@ -15,7 +15,7 @@ class Command(BaseCommand):
         with open(str(settings.BASE_DIR)+"/IN.txt",'r') as file:
             data = file.readlines()
             states = []
-            cities = ['ananthapur']
+            cities = ['ananthapur','chittoor']
             user = self.user_manager.get_user_by_id(6)
             count=len(data)
             for d in data:
