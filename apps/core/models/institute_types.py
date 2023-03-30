@@ -10,3 +10,10 @@ class InstituteTypes(models.Model):
     from_age = models.PositiveIntegerField()
     to_age = models.PositiveIntegerField()
     years = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.education
+    
+    class Meta:
+        ordering = ['education']
+        db_table = 'institute_types'
