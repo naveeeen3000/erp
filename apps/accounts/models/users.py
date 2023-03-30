@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from django.db.models import UniqueConstraint
 class Users(AbstractUser):
     
     
@@ -11,6 +11,7 @@ class Users(AbstractUser):
         ("student","STUDENT"),
         ("teacher", "TEACHER")
     ]
+    email = models.EmailField(db_index=True)
     role = models.CharField(max_length=20,choices=user_roles,default="STUDENT")
     profile_image = models.ImageField(null=True)
     student_id = models.CharField(max_length=20,null=True)
@@ -27,3 +28,6 @@ class Users(AbstractUser):
         db_table = 'users'
         ordering = ['first_name']
         verbose_name = 'An Institutes member'
+        constraints = [
+            UniqueConstraint(fields=['email','student_id','phone'],name='unique_student_constraint')
+        ]
