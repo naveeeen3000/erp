@@ -3,8 +3,9 @@ from django.conf import settings
 from apps.core.managers.zones_manager import ZonesManager
 from apps.accounts.managers.user_manager import UserManager
 from apps.core.models.colleges import Colleges
-import progressbar
 import pandas as pd
+import math
+import progressbar
 
 
 class Command(BaseCommand):
@@ -33,9 +34,9 @@ class Command(BaseCommand):
                 continue
             zone = zone[0]
             website = row['website']
-            yoe = str(int(row['year_of_establishment'])) if type(row['year_of_establishment']) is float  else None
+            yoe = str(int(row['year_of_establishment'])) if not math.isnan(row['year_of_establishment'])  else None
             aff_uni = row['affiliat_university']
-            aff_year = str(int(row['year_of_affiliation'])) if type(row['year_of_affiliation']) is float else None
+            aff_year = str(int(row['year_of_affiliation'])) if not math.isnan(row['year_of_affiliation'])  else None
             location = row['location']
             lat = str(row['latitude'])
             lng = str(row['longitude'])
