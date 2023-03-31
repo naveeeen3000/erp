@@ -15,7 +15,7 @@ class Command(BaseCommand):
         self.user_manager = UserManager()
 
     def handle(self,*args,**options):
-        csv_data = pd.read_csv(str(settings.BASE_DIR)+"/college_data.csv",encoding='latin-1')
+        csv_data = pd.read_csv(str(settings.BASE_DIR)+"/college_data.csv")
         # print(type(csv_data))
         count = len(csv_data)
         bar = progressbar.ProgressBar(count).start()
