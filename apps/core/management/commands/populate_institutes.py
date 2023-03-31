@@ -77,7 +77,7 @@ class Command(BaseCommand):
             )
             if inserted:
                 i+=1
-                bar.update(index)
+            bar.update(index)
         print("isnserted = " + str(i))
         print("Failed due to zone not found = " + str(x))
             
