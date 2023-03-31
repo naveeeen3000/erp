@@ -33,9 +33,9 @@ class Command(BaseCommand):
                 continue
             zone = zone[0]
             website = row['website']
-            yoe = str(int(row['year_of_establishment'])) if not row['year_of_establishment'].isnull() else None
+            yoe = str(int(row['year_of_establishment'])) if type(row['year_of_establishment']) is float  else None
             aff_uni = row['affiliat_university']
-            aff_year = str(int(row['year_of_affiliation'])) if not row['year_of_affiliation'].isnull() else None
+            aff_year = str(int(row['year_of_affiliation'])) if type(row['year_of_affiliation']) is float else None
             location = row['location']
             lat = str(row['latitude'])
             lng = str(row['longitude'])
