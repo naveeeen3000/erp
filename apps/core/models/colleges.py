@@ -12,7 +12,7 @@ class Colleges(models.Model):
     city = models.CharField(max_length=50,null=True)
     pincode = models.CharField(max_length=6)
     website = models.URLField(null=True)
-    year_of_establishment = models.CharField(max_length=4)
+    year_of_establishment = models.CharField(max_length=4,null=True)
     affiliat_university = models.CharField(max_length=100,null=True)
     year_of_affiliation = models.CharField(max_length=10,null=True)
     location = models.CharField(max_length=1)
