@@ -9,7 +9,7 @@ class Colleges(models.Model):
     description = models.TextField(null=True)
     address_lane_1 = models.TextField(null=True)
     address_lane_2 = models.TextField(null=True)
-    city = models.CharField(max_length=50,null=True)
+    city = models.CharField(max_length=100,null=True)
     pincode = models.CharField(max_length=6)
     website = models.URLField(null=True)
     year_of_establishment = models.CharField(max_length=4,null=True)

@@ -17,7 +17,7 @@ class Command(BaseCommand):
     def handle(self,*args,**options):
         csv_data = pd.read_csv(str(settings.BASE_DIR)+"/college_data.csv")
         # print(type(csv_data))
-        count = len(csv_data)
+        count = len(csv_data)   
         bar = progressbar.ProgressBar(count).start()
         x = 0
         i = 0
@@ -29,7 +29,7 @@ class Command(BaseCommand):
             pincode = str(row['pin_code'])
             zone = self.z_manager.get_zones_by_pincode_and_city_or_district(pincode,[city,row['district']])
             if zone is None:
-                print("ZONE NOT FOUND for {}.".format(pincode))
+                
                 x+=1
                 continue
             zone = zone[0]
