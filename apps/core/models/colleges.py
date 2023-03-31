@@ -5,7 +5,7 @@ from datetime import datetime
 
 class Colleges(models.Model):
     institute_id = models.BigAutoField(primary_key=True,auto_created=True)
-    institute_name = models.CharField(null=False,db_index=True,max_length=100)
+    institute_name = models.CharField(null=False,db_index=True,max_length=255)
     description = models.TextField(null=True)
     address_lane_1 = models.TextField(null=True)
     address_lane_2 = models.TextField(null=True)
