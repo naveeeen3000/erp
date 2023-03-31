@@ -14,7 +14,7 @@ class Command(BaseCommand):
         self.user_manager = UserManager()
 
     def handle(self,*args,**options):
-        csv_data = pd.read_csv(str(settings.BASE_DIR)+"/college_data.csv")
+        csv_data = pd.read_csv(str(settings.BASE_DIR)+"/college_data.csv",encoding='latin-1')
         # print(type(csv_data))
         count = len(csv_data)
         bar = progressbar.ProgressBar(count).start()
@@ -25,7 +25,7 @@ class Command(BaseCommand):
             address_1 = row['address_line1']
             address_2 = row['address_line2'] 
             city = row['city'] 
-            pincode = row['pin_code']
+            pincode = str(row['pin_code'])
             zone = self.z_manager.get_zones_by_pincode_and_city_or_district(pincode,[city,row['district']])
             if zone is None:
                 print("ZONE NOT FOUND for {}.".format(pincode))
@@ -33,12 +33,12 @@ class Command(BaseCommand):
                 continue
             zone = zone[0]
             website = row['website']
-            yoe = row['year_of_establishment']
+            yoe = str(int(row['year_of_establishment']))
             aff_uni = row['affiliat_university']
-            aff_year = row['year_of_affiliation']
+            aff_year = str(int(row['year_of_affiliation']))
             location = row['location']
-            lat = row['latitude']
-            lng = row['longitude']
+            lat = str(row['latitude'])
+            lng = str(row['longitude'])
             coll_type = row['type']
             autonomous = row['autonomous']
             has_diploma_courses = row['has_diploma_courses']
@@ -78,6 +78,7 @@ class Command(BaseCommand):
             if inserted:
                 i+=1
                 bar.update(index)
+            break
         print("isnserted = " + str(i))
         print("Failed due to zone not found = " + str(x))
             
