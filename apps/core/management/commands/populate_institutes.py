@@ -33,9 +33,9 @@ class Command(BaseCommand):
                 continue
             zone = zone[0]
             website = row['website']
-            yoe = str(int(row['year_of_establishment']))
+            yoe = str((row['year_of_establishment']))
             aff_uni = row['affiliat_university']
-            aff_year = str(int(row['year_of_affiliation']))
+            aff_year = str((row['year_of_affiliation']))
             location = row['location']
             lat = str(row['latitude'])
             lng = str(row['longitude'])
@@ -77,7 +77,7 @@ class Command(BaseCommand):
             )
             if inserted:
                 i+=1
-            bar.update(index)
+                bar.update(index)
         print("isnserted = " + str(i))
         print("Failed due to zone not found = " + str(x))
             
