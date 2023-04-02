@@ -15,7 +15,7 @@ try:
 except:
     allowed_host = ["*"]
 
-ALLOWED_HOSTS = allowed_host
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
