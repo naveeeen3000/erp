@@ -44,10 +44,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'erpsys.urls'
 
+import os
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR+"erpsys/templates/"],
+        'DIRS': [os.path.join(BASE_DIR,"erpsys/templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
