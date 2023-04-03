@@ -14,7 +14,10 @@ def custom_task(request):
         auth_key = request.POST['authorization_key']
         input_id_spit_arr = input_ids.split('\r\n')
         response = get_response(input_id_spit_arr,auth_key)
-        return render(request,'custom_task_template.html',context={'output':response})
+        if response['success'] == True:
+            return render(request,'custom_task_template.html',context={'output':response})
+        else:
+            return render(request,'custom_task_template.html',context={'output':response})
         # return render(request,"custom_task_template.html",)
 
 
@@ -46,7 +49,12 @@ def get_response(item_ids,auth_key):
         req_payload = json.dumps(payload)
         response = requests.post(url=url,headers=headers,data=req_payload)
         # print(response.json())
-        res = response.json()
+        try:
+            res = response.json()
+        except Exception as e:
+            return {"success":False,"error_response":str(e),'response':response.content}
+        if response.status_code != 200 and not res['success']:
+            return {"success":False,"error_response":res}
         result = get_result_from_response(res)
         responses.append({'item':item,'response':res['data']})
         if not result:
@@ -54,7 +62,7 @@ def get_response(item_ids,auth_key):
         else:
             valid_item_ids.append(item)
         # break
-    return {'invalid_item_ids':invaid_item_ids,'valid_item_ids':valid_item_ids,'responses':responses}
+    return {"success":True,'invalid_item_ids':invaid_item_ids,'valid_item_ids':valid_item_ids,'responses':responses}
     
 
 def get_result_from_response(response):

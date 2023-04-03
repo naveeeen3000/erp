@@ -10,39 +10,52 @@
     <title>Custom Task</title>
 </head>
 <body>
-    {% if output %}
-        <h1>invalid item ids </h1>
-        <ul>
-            {% for item_id in output.invalid_item_ids %}
-            <li>{{ item_id }}</li>
-            {% endfor %}
-        </ul>
-        <h1>Valid Item ids</h1>
-        <ul>
-            {% for item_id in output.valid_item_ids %}
-            <li>{{ item_id }}</li>
-            {% endfor %}
-        </ul>
-        <br/>
-        <div class="container">
-            {% for data in output.responses %}
-                <h2>Items Data: {{data.item}}</h2>
-                <p>Click on the button to toggle between showing and hiding content.</p>
-                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{data.item}}">Simple collapsible</button>
+    <div class="container jumbotron">
+        {% if output %}
+            {% if output.error_response %}
+                <a href="{% url 'custom-task' %}"><button class='btn btn-info' >Run another task</button></a>
+                <p style='color:red'>Something went wrong. </p>
+                {% if output.response %}
+                    <h4>Respnonse </h4>
+                    <p style='overflow-x:auto'>{{output.response}}</p>
+                {% endif %}
+                <h4>Error: </h4>
+                <p>{{output.error_response}}</P>
+            {% else %}
+            <a href="{% url 'custom-task' %}"><button class='btn btn-info' >Run another task</button></a>
+            <p color='red'>invalid item ids </p>
+            <ul>
+                {% for item_id in output.invalid_item_ids %}
+                <li>{{ item_id }}</li>
+                {% endfor %}
+            </ul>
+            <p color='green'>Valid Item ids</p>
+            <ul>
+                {% for item_id in output.valid_item_ids %}
+                <li>{{ item_id }}</li>
+                {% endfor %}
+            </ul>
+            <br/>
+            <div class="container">
+                {% for data in output.responses %}
+                <h4>Items Data: {{data.item}}</h4>
+                <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{data.item}}">Show Response</button>
                 <div id='{{data.item}}' class="collapse">
-                {{data.response}}
+                    {{data.response}}
                 </div>
-            {% endfor %}
-        </div>
-    {% else %}
-    <h1>
-        Upload the text file.
-    </h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{form.as_p}}<br/>
-        <input type="submit" value="Submit">
-    </form>
-    {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% else %}
+        <h2>
+            Enter the auth key and item ids
+        </h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{form}}<br/>
+            <input type="submit" value="Submit" class="btn btn-success">
+        </form>
+        {% endif %}
+    </div>
 </body>
 </html>
