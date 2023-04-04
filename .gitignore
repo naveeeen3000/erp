@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 college_data.csv
 pincode_data.csv
+leetcode.csv

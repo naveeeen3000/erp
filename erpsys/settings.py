@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     'apps.accounts',
     'apps.student',
     'apps.teacher',
-    'apps.dashboard'
+    'apps.dashboard',
+    'apps.leetcode'
 ]
 
 MIDDLEWARE = [
@@ -96,7 +97,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
