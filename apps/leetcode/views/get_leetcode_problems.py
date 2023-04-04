@@ -13,8 +13,8 @@ class LeetCodeProblemsView(APIView):
     def get(self,request):
         try:
             problems = self.leet_manager.get_problems()
-            data = LeetCodeProblemSerializer(problems).data
+            data = LeetCodeProblemSerializer(problems,many=True).data
 
             return Response(data=data,status=status.HTTP_200_OK)
         except Exception as e:
-            return Response({"error":str(e)},status=status.HTTP_400_BAD_REQUEST)
+            return Response({"queryset":str(problems),"error":str(e)},status=status.HTTP_400_BAD_REQUEST)
