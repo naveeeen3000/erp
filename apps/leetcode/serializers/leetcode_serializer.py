@@ -12,5 +12,3 @@ class LeetCodeProblemSerializer(serializers.ModelSerializer):
         fields = '__all__'
         # exclude = ['leetcode_question_link']
         
-
-    
