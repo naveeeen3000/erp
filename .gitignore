@@ -127,7 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+# data 
+
 college_data.csv
 deploy.sh
 leetcode.csv
 pincode_data.csv
+

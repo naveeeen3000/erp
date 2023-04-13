@@ -1,14 +1,14 @@
 
 from pathlib import Path
 from decouple import config
-
+from erpsys.helpers.general_helpers import to_bool
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 SECRET_KEY = config("DJANGO_SECRET_KEY")
 
-DEBUG = config("DJANGO_DEBUG")
+DEBUG = to_bool(config("DJANGO_DEBUG"))
 
 try:
     allowed_host = config("ALLOWED_HOST") 
@@ -24,12 +24,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'rest_framework',
     'apps.accounts',
     'apps.student',
     'apps.teacher',
     'apps.dashboard',
-    'apps.core'
+    'apps.leetcode',
 ]
 
 MIDDLEWARE = [
@@ -40,6 +41,16 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
+]
+
+CORS_ALLOWED_ORIGINS  = [
+    'http://localhost:5173'
+]
+
+CORS_ALLOWED_METHODS = [
+    "GET","POST"
 ]
 
 ROOT_URLCONF = 'erpsys.urls'
@@ -47,7 +58,7 @@ ROOT_URLCONF = 'erpsys.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [str(BASE_DIR)+'/erpsys/templates/',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -97,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
