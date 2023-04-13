@@ -6,8 +6,6 @@ from getpass import getpass
 
 class Command(BaseCommand):
 
-
-
     def handle(self, *args, **options):
         first_name = input("enter student name: ")
         email = input("email: ")
