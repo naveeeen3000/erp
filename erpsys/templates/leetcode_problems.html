@@ -13,10 +13,29 @@
         $(document).ready(function () {
             $('#example').DataTable(); 
         });
-        function changeButton(ele){
-            console.log(ele)
-            ele.innerHtml = 'Mark it completed?';
-            ele.class = 'btn btn-success';
+        async function changeButton(ele){
+            id = ele.id;
+            const baseUrl = window.location.origin;
+            const endPoint = "/leetcode/problem/" + id ;
+            const url = baseUrl + endPoint;
+            var currentDateTime = new Date();
+            var dateTime = currentDateTime.toLocaleString('en-in',{hour12:false})
+            console.log(dateTime)
+            const payload = {
+                'fields':{
+                    'started_at': dateTime
+                }
+            }
+            const response = await fetch(url,{
+                method: "POST",
+                body: JSON.stringify(payload),
+                headers: {"Content-Type": "application/json"}
+            });
+            if(response.status == 200){
+                ele.style.display = 'none';
+                const compeltedButton = document.getElementById('finish_'+id)
+                compeltedButton.hidden = false;
+            }
         }
     </script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -73,7 +92,11 @@
                         {% if pro.started_at %}
                           {{started_at}}
                         {% else %}
-                        <a class='problem-url' target="_blank" href={{pro.leetcode_question_link}}><button id="{{pro.problem_id}}" onclick="changeButton(this)" class="btn btn-info">Start Solving</button></a>
+                        <a class='problem-url' target="_blank" href={{pro.leetcode_question_link}}>
+                            <button id="{{pro.problem_id}}" onclick="changeButton(this)" class="btn btn-info">Start Solving.</button>
+                            <button id="finish_{{pro.problem_id}}" class = 'btn btn-success' onclick="markFinished(this)" hidden>Mark Completed.</button>
+                            <span id="time_taken{{pro.problem_id}}"></span>
+                        </a>
                         
                         {% endif %}
                     </td>
