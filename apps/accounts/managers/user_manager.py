@@ -6,7 +6,7 @@ class UserManager():
     def get_user_by_id(self,id=None):
         if id is None:
             raise ValidationError("Id not provided")
-        user = Users.objects.get(id)
+        user = Users.objects.get(id=id)
         if user:
             return user
         return None
