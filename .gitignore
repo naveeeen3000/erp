@@ -132,3 +132,4 @@ dmypy.json
 pincode_data.csv
 college_data.csv
 leetcode.csv
+deploy.sh
